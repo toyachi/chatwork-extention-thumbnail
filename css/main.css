@@ -1,6 +1,22 @@
-.thumbnail-box {
+._chatTimeLineMessageBox .thumbnail-box {
+  margin: 5px 0px 0px 5px;
+}
+.thumbnail-inner-box {
+  border-left: solid 3px #68b7e6;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 12px;
+  display: inline-block;
+  vertical-align: middle;
+}
+.thumbnail-inner-box img {
+  display: inline-block;
+  vertical-align: middle;  
+}
+.stamp-img {
   margin-top: 10px;
+  max-height: 150px;
 }
 .thumbnail-img {
-  max-height: 150px;
+  max-height: 36px;
 }

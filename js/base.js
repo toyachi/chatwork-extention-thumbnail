@@ -13,28 +13,32 @@ var checkDomChange = (function () {
     };
     if (mrecords.some(checkChange)) {
       console.log("DomChanged!!");
-      $($(".chatwork-token-url").get().reverse()).each(function(){
+      $(".chatwork-token-url").each(function(i){
         var link = $(this).attr('href');
         if(link.match(/.jpg|.png|.gif|.jpeg/)){
-          console.log("画像発見")
-          console.log(link);
-          $(this).after('<div class="thumbnail-box"><a href="' + link + '" target="_blank"><img class="thumbnail-img imagePreview" src="' + link + '" onerror="this.src=\'http://design-ec.com/d/e_others_50/l_e_others_501.png\';"></a></div>');
+          console.log("画像URL発見")
+//          console.log(link);
+          $(this).after('<div><a href="' + link + '" target="_blank"><img class="stamp-img imagePreview" src="' + link + '" onerror="this.src=\'http://design-ec.com/d/e_others_50/l_e_others_501.png\';"></a></div>');
+          console.log($(this));
           $(this).hide();
         }else{
           var thurl = encodeURIComponent(link);
-//          $.ajax({
-//            url: "",
-//            dataType: 'json',
-//			type: 'GET',
-//			crossDomain: true,
-//			cache: false,
-//			success: function(data){
+          $.ajax({
+            url: "https://n0v1poj6m0.execute-api.ap-northeast-1.amazonaws.com/test/thumbnailapi",
+            dataType: 'json',
+			type: 'GET',
+			crossDomain: true,
+			cache: false,
+			success: function(data){
+              $(".chatwork-token-url").eq(i).after('<div class="thumbnail-box"><div class="thumbnail-inner-box"><strong class="thumbnail-title">' + data.title + '</strong><p class="thumbnail-title">' + data.text + '</p></div><img class="thumbnail-img" src="http://design-ec.com/d/e_others_50/l_e_others_501.png"></div>');
 //              console.log(data);
-//			},
-//			error: function(e){
-//		      console.log("ERROR")
-//			}
-//		});
+			},
+			error: function(e){
+              console.log("ERROR");
+              console.log(e);
+              
+			}
+		});
         }
       });
 	}
